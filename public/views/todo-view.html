@@ -1,0 +1,15 @@
+<h2>TODO List</h2>
+
+<input type="text" placeholder="Thing To Do" ng-model="todo">
+<button type="button" ng-click="addThing()">Add</button>
+
+<hr>
+
+<div ng-repeat="thing in thingsToDo track by $index">
+  <p> {{thing.todo}}
+    <button type="button" ng-click="removeThing(thing.id)">Delete</button>
+  </p>
+
+  <input class="editStuff" type="text" placeholder="Change Thing" ng-model="changedThing">
+  <button class="editStuff" type="button" ng-click="editThing(changedThing, thing.id)">Edit!</button>
+</div>

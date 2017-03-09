@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html ng-app="todoModule">
+  <head>
+    <meta charset="utf-8">
+    <title>TO-DO List</title>
+    <link rel="stylesheet" href="css/styles.css">
+  </head>
+  <body ng-controller="todoController">
+
+    <h2>TODO List</h2>
+
+    <!-- Add a model to this input -->
+    <input type="text" placeholder="Thing To Do" ng-model="addItem">
+    <!-- Add ng-click to this button to send our input to the controller -->
+    <button type="button" ng-click="addTask(addItem)">Add</button>
+
+    <hr>
+
+    <!-- This is DIV is what will be repeated with ng-repeat to display our information -->
+    <div ng-repeat="task in thingsToDo">
+      <p>
+        {{task.todo}}
+        <!-- Add ng-click to this button to send our input to the controller -->
+        <button type="button" ng-click="removeTask(task.id)">Delete</button>
+      </p>
+
+      <!-- Add a model to this input -->
+      <input class="editStuff" type="text" placeholder="Change Thing" ng-model="changeItem">
+      <!-- Add ng-click to this button to send our input to the controller -->
+      <button class="editStuff" type="button" ng-click="changeTask(changeItem, task.id)">Edit!</button>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.2/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.2/angular-route.min.js"></script>
+    <script src="js/modules/module.js"></script>
+    <script src="js/controllers/todo-controller.js"></script>
+    <script src="js/services/todo-service.js"></script>
+  </body>
+</html>
