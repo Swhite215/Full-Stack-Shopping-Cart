@@ -9,6 +9,8 @@ body {
   margin: 0;
   padding: 0;
   font-family: Garamond, serif;
+  color: white;
+  background-color: #24111c;
 }
 
 div.container {
@@ -22,6 +24,7 @@ div.container {
 div.container h2#pageTitle {
   font-size: 60px;
   font-family: Garamond, serif;
+  font-weight: lighter;
 }
 
 /* Input Styling */
@@ -35,6 +38,8 @@ div.inputContainer input {
   padding: 10px;
   line-height: 20px;
   font-size: 18px;
+  background-color: #f2f1e5;
+  color: black;
 }
 
 div.inputContainer button {
@@ -42,27 +47,94 @@ div.inputContainer button {
   padding: 10px;
   line-height: 20px;
   font-size: 18px;
+  background-color: #f2f1e5;
+  color: black
 }
 
 hr {
   color: white;
 }
 
-/* Output Styling */
+/* Output Container Styling */
 div.outputContainer {
   width: 75%;
+  margin-top: 3%;
   margin-left: auto;
   margin-right: auto;
   padding: 10px;
-  border: 1px solid red;
-  border-radius: 5px;
+  border: 1px solid white;
+  background-color: #bfa37f;
+  color: black;
+  -webkit-box-shadow: -6px 8px 5px 0px rgba(255,255,255,0.7);
+  -moz-box-shadow: -6px 8px 5px 0px rgba(255,255,255,0.7);
+  box-shadow: -6px 8px 5px 0px rgba(255,255,255,0.7);
 }
 
 div.outputContainer h2#outputTitle {
   font-size: 40px;
   text-decoration: underline;
+  margin-bottom: 5px;
+  font-weight: lighter;
 }
 
 div.outputContainer h3 {
   font-size: 32px;
+  margin-top: 0;
+  font-weight: lighter;
+}
+
+/* Output Styling */
+div.singleItem {
+  margin: 2%;
+}
+div.singleItem button.deleteButton {
+  float: left;
+  width: 60px;
+  line-height: 25px;
+  background-color: #f2f1e5;
+  color: black
+}
+
+div.singleItem p {
+  font-size: 28px;
+  line-height: 20px;
+  letter-spacing: 5px;
+  text-align: center;
+}
+
+div.singleItem span.priceSpan {
+  font-size: 18px;
+}
+
+/* Alter Container Styling */
+div.alterContainer {
+  float: right;
+  text-align: center;
+}
+
+div.alterContainer input, div.alterContainer button {
+  margin-right: 5px;
+  padding: 5px;
+  line-height: 20px;
+  font-size: 14px;
+  background-color: #f2f1e5;
+  color: black;
+}
+
+div.alterContainer button {
+  width: 60px;
+  line-height: 20px;
+}
+
+/* Footer Positioning */
+footer {
+  width: 100%;
+  background-color: #d47c29;
+  color: white;
+  font-size: 18px;
+  position: fixed;
+  bottom: 0;
+  padding: 20px;
+  line-height: 10px;
+  text-align: center;
 }

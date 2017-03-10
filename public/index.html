@@ -26,24 +26,28 @@
         <h2 id="outputTitle">The Cart O'Goodies</h2>
         <h3>Total: ${{total}}</h3>
         <!-- NG-Repeat DIV -->
-        <div class="singleItem" ng-repeat="item in shopList">
+        <div class="singleItem" ng-repeat="item in shopList | orderBy: 'product' ">
           <!-- NG-CLICK for Removing Function -->
-          <button type="button" ng-click="removeItem(item.id)">Delete</button>
+          <button type="button" ng-click="removeItem(item.id)" class="deleteButton">Delete</button>
           <p>
             {{item.product}}
             <span class="priceSpan">${{item.price}}.00</span>
           </p>
-          <!-- NG-MODEL Input for Changing Function -->
-          <input class="editStuff" type="text" ng-model="updatedItem" placeholder="Alter Item">
-          <input class="editStuff" type="number" ng-model="updatedPrice" placeholder="Alter Price">
-          <!-- NG-CLICK for Changing Function -->
-          <button class="editStuff" type="button" ng-click="updateItem(updatedItem, updatedPrice, item.id)">Edit!</button>
+
+          <div class="alterContainer">
+            <!-- NG-MODEL Input for Changing Function -->
+            <input class="editInput" type="text" ng-model="updatedItem" placeholder="Alter Item">
+            <input class="editInput" type="number" ng-model="updatedPrice" placeholder="Alter Price">
+            <!-- NG-CLICK for Changing Function -->
+            <button class="editButton" type="button" ng-click="updateItem(updatedItem, updatedPrice, item.id)">Edit!</button>
+          </div>
         </div>
 
       </div>
 
     </div>
 
+    <footer> White Designs &copy; 2017</footer>
     <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.2/angular.min.js"></script>
