@@ -5,32 +5,36 @@
     <title>TO-DO List</title>
     <link rel="stylesheet" href="css/styles.css">
   </head>
+
   <body ng-controller="todoController">
 
     <h2>TODO List</h2>
 
-    <!-- Add a model to this input -->
+    <!-- NG Models for Object Product and Price -->
     <input type="text" placeholder="Shopping Item" ng-model="object.product">
     <input type="text" placeholder="Price" ng-model="object.price">
-    <!-- Add ng-click to this button to send our input to the controller -->
+    <!-- NG-CLICK for Add Item Function -->
     <button type="button" ng-click="addItem(object)">Add</button>
 
     <hr>
 
-    <!-- This is DIV is what will be repeated with ng-repeat to display our information -->
+    <!-- NG-Repeat DIV -->
     <div ng-repeat="item in shopList">
-
       <p>
-        <!-- Add ng-click to this button to send our input to the controller -->
+        <!-- NG-CLICK for Removing Function -->
         <button type="button" ng-click="removeItem(item.id)">Delete</button>
         {{item.product}}
         <span class="priceSpan">{{item.price}}</span>
       </p>
+      <!-- NG-MODEL Input for Changing Function -->
+      <input class="editStuff" type="text" ng-model="updatedItem" placeholder="Alter Item">
+      <input class="editStuff" type="number" ng-model="updatedPrice" placeholder="Alter Price">
+      <!-- NG-CLICK for Changing Function -->
+      <button class="editStuff" type="button" ng-click="updateItem(updatedItem, updatedPrice, item.id)">Edit!</button>
+    </div>
 
-      <!-- Add a model to this input -->
-      <input class="editStuff" type="text" placeholder="Change Thing" ng-model="changeItem">
-      <!-- Add ng-click to this button to send our input to the controller -->
-      <button class="editStuff" type="button" ng-click="changeTask(changeItem, task.id)">Edit!</button>
+    <div class="Total Div">
+      <p>Total: {{total}} </p>
     </div>
 
     <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>

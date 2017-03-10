@@ -10,7 +10,8 @@ app.factory('todoService', function($http) {
     getShopList: getShopList,
     defineShopList: defineShopList,
     removeListItem: removeListItem,
-    addListItem: addListItem
+    addListItem: addListItem,
+    updateItem: updateItem
   }
 
   // Write out our functions, one for each CRUD command(GET, POST, PUT, DELETE)
@@ -30,7 +31,7 @@ app.factory('todoService', function($http) {
   function removeListItem(itemId) {
     var promise = $http({
       method: 'DELETE',
-      url: '/api-remove-item' + itemId
+      url: '/api-remove-item/' + itemId
     }).then(function successfulCallback(response) {
       list = response.data;
     }, function(error) {
@@ -47,6 +48,23 @@ app.factory('todoService', function($http) {
         product: object.product,
         price: object.price
       }
+    }).then(function successfulCallback(response) {
+      list = response.data;
+    }, function(error) {
+      console.log(error);
+    });
+    return promise;
+  }
+
+  function updateItem(changeObject) {
+    var newItem = {
+      product: changeObject.product,
+      price: changeObject.price
+    };
+    var promise = $http({
+      method: 'PUT',
+      url: '/api-change-item/' + changeObject.id,
+      data: newItem
     }).then(function successfulCallback(response) {
       list = response.data;
     }, function(error) {

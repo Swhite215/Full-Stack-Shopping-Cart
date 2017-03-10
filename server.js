@@ -24,7 +24,7 @@ var pool = new pg.Pool(config);
 app.use(bodyParser.json({ extended: true}));
 app.use(express.static(__dirname + '/public'));
 
-// Add a route for GET, PUT, DELETE, and CREATE
+// Server Route for Get Request
 app.get('/api/items', function(req, res, next) {
   var items = [];
 
@@ -34,16 +34,17 @@ app.get('/api/items', function(req, res, next) {
     query.on('row', function(row) {
       items.push(row);
     });
-
     query.on('end', function() {
       console.log(items);
       client.end();
       return res.json(items);
     });
+
   });
 });
 
-app.delete('/api-remove-item:id', function(req, res, next) {
+// Server Route for DELETE Request
+app.delete('/api-remove-item/:id', function(req, res, next) {
   var items = [];
   var id = req.params.id;
 
@@ -64,6 +65,7 @@ app.delete('/api-remove-item:id', function(req, res, next) {
   });
 });
 
+// Server Route for POST Request
 app.post('/api-add-item', function(req, res, next) {
   var items = [];
   var data = {
@@ -73,6 +75,31 @@ app.post('/api-add-item', function(req, res, next) {
 
   pg.connect(connectionString, function(err, client, done) {
     client.query('INSERT INTO shoppingcart(product, price) values($1, $2)', [data.product, data.price]);
+
+    var query = client.query('SELECT * FROM shoppingcart');
+
+    query.on('row', function(row) {
+      items.push(row);
+    });
+
+    query.on('end', function() {
+      client.end();
+      return res.json(items);
+    });
+  });
+});
+
+// Server Route for PUT Request
+app.put('/api-change-item/:id', function(req, res, next) {
+  var items = [];
+  var data = {
+    product: req.body.product,
+    price: req.body.price
+  };
+  var id = req.params.id;
+
+  pg.connect(connectionString, function(err, client, done) {
+    client.query('UPDATE shoppingcart SET product=($1), price=($2) WHERE id=($3)', [data.product, data.price, id]);
 
     var query = client.query('SELECT * FROM shoppingcart');
 
