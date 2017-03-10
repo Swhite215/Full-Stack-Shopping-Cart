@@ -24,108 +24,69 @@ var pool = new pg.Pool(config);
 app.use(bodyParser.json({ extended: true}));
 app.use(express.static(__dirname + '/public'));
 
-// Add a route for GET
-app.get('/get-things', function(req, res, next) {
-  var results = [];
-  pg.connect(connectionString, function(err, client, done) {
+// Add a route for GET, PUT, DELETE, and CREATE
+app.get('/api/items', function(req, res, next) {
+  var items = [];
 
-    // client.query('INSERT INTO todo (todo) values($1)', ['swim']);
-
-    var query = client.query('SELECT * FROM todo ORDER BY todo');
+  pg.connect(connectionString, function(err, client, done){
+    var query = client.query('SELECT * FROM shoppingcart');
 
     query.on('row', function(row) {
-      results.push(row);
+      items.push(row);
     });
 
     query.on('end', function() {
-      console.log(results);
+      console.log(items);
       client.end();
-      return res.json(results);
+      return res.json(items);
     });
-
   });
 });
 
-// Add a route for each CRUD command: GET, POST, PUT, DELETE
-app.delete('/delete-things/:id', function(req, res, next) {
-  var results = [];
+app.delete('/api-remove-item:id', function(req, res, next) {
+  var items = [];
   var id = req.params.id;
 
-  pool.connect(function(err, client, done) {
-    if(err) {
-      done();
-      return res.status(500).json({
-        success: false,
-        data: err
-      });
-    }
-    client.query('DELETE FROM todo WHERE id=($1)', [id]);
-
-    var query = client.query('SELECT * FROM todo ORDER BY todo');
-    query.on('row', function(row) {
-      results.push(row);
-    });
-    query.on('end', function(){
-      done();
-      return res.json(results);
-    });
-  });
-  console.log("Something got deleted");
-});
-
-app.post('/add-thing', function(req, res, next) {
-  var results = [];
-  var data = {
-    todo: req.body.todo
-  };
-
   pg.connect(connectionString, function(err, client, done) {
-    client.query('INSERT INTO todo(todo) values($1)', [data.todo]);
-    var query = client.query('SELECT * FROM todo ORDER BY todo');
+
+    client.query('DELETE FROM shoppingcart WHERE id=($1)', [id]);
+
+    var query = client.query('SELECT * FROM shoppingcart');
 
     query.on('row', function(row) {
-      results.push(row);
+      items.push(row);
     });
 
     query.on('end', function() {
       client.end();
-      return res.json(results);
+      return res.json(items);
     });
   });
-
-
 });
 
-app.put('/update-thing/:id', function(req, res, next) {
-  var results = [];
-  var id = req.params.id;
+app.post('/api-add-item', function(req, res, next) {
+  var items = [];
   var data = {
-    todo: req.body.todo
-  };
-  console.log(data);
+    product: req.body.product,
+    price: req.body.price
+  }
 
-  pool.connect(function(err, client, done) {
-    if(err) {
-      done();
-      return res.status(500).json({
-        success: false,
-        data: err
-      });
-    }
-    client.query('UPDATE todo SET todo=($1) WHERE id=($2)', [data.todo, id]);
+  pg.connect(connectionString, function(err, client, done) {
+    client.query('INSERT INTO shoppingcart(product, price) values($1, $2)', [data.product, data.price]);
 
-    var query = client.query('SELECT * FROM todo ORDER BY todo');
+    var query = client.query('SELECT * FROM shoppingcart');
+
     query.on('row', function(row) {
-      results.push(row);
+      items.push(row);
     });
-    query.on('end', function(){
-      done();
-      return res.json(results);
+
+    query.on('end', function() {
+      client.end();
+      return res.json(items);
     });
   });
-
-
 });
+
 
 var server = app.listen(3000, function() {
   var port = server.address().port;

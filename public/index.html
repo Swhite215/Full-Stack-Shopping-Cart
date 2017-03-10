@@ -10,18 +10,21 @@
     <h2>TODO List</h2>
 
     <!-- Add a model to this input -->
-    <input type="text" placeholder="Thing To Do" ng-model="addItem">
+    <input type="text" placeholder="Shopping Item" ng-model="object.product">
+    <input type="text" placeholder="Price" ng-model="object.price">
     <!-- Add ng-click to this button to send our input to the controller -->
-    <button type="button" ng-click="addTask(addItem)">Add</button>
+    <button type="button" ng-click="addItem(object)">Add</button>
 
     <hr>
 
     <!-- This is DIV is what will be repeated with ng-repeat to display our information -->
-    <div ng-repeat="task in thingsToDo">
+    <div ng-repeat="item in shopList">
+
       <p>
-        {{task.todo}}
         <!-- Add ng-click to this button to send our input to the controller -->
-        <button type="button" ng-click="removeTask(task.id)">Delete</button>
+        <button type="button" ng-click="removeItem(item.id)">Delete</button>
+        {{item.product}}
+        <span class="priceSpan">{{item.price}}</span>
       </p>
 
       <!-- Add a model to this input -->

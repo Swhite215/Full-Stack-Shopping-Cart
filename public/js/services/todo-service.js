@@ -3,79 +3,60 @@ var app = angular.module('todoModule');
 // Need to inject something to make AJAX calls
 app.factory('todoService', function($http) {
 
-  var todos = [];
+  var list = [];
 
   return {
     // Establish our key/value pairs for our functions
-    retrieveData: retrieveData,
-    updateList: updateList,
-    deleteData: deleteData,
-    addData: addData,
-    editData: editData
+    getShopList: getShopList,
+    defineShopList: defineShopList,
+    removeListItem: removeListItem,
+    addListItem: addListItem
   }
 
   // Write out our functions, one for each CRUD command(GET, POST, PUT, DELETE)
-  function retrieveData() {
+  function getShopList() {
     var promise = $http({
       method: 'GET',
-      url: '/get-things'
+      url: '/api/items'
     }).then(function successfulCallback(response) {
-      console.log(response);
-      todos = response.data;
+      console.log(response.data);
+      list = response.data;
     }, function(error) {
       console.log(error);
     });
     return promise;
   }
 
-  function updateList() {
-    return todos;
-  }
-
-  //function to delete an item from the server
-  function deleteData(taskId) {
+  function removeListItem(itemId) {
     var promise = $http({
       method: 'DELETE',
-      url: '/delete-things/' + taskId
+      url: '/api-remove-item' + itemId
     }).then(function successfulCallback(response) {
-      console.log(response);
-      todos = response.data;
+      list = response.data;
     }, function(error) {
       console.log(error);
     });
     return promise;
   }
 
-  //function to add an item to the server.
-  function addData(addItem) {
+  function addListItem(object) {
     var promise = $http({
       method: 'POST',
-      url: '/add-thing',
+      url: '/api-add-item',
       data: {
-        todo: addItem
-    }
+        product: object.product,
+        price: object.price
+      }
     }).then(function successfulCallback(response) {
-      console.log(response);
-      todos = response.data;
-    });
-    return promise;
-  }
-
-  //function to edit a data entry on the server
-  function editData(changeObject) {
-    var todo = {
-      todo: changeObject.todo
-    };
-    var promise = $http({
-      method: 'PUT',
-      url: '/update-thing/' + changeObject.id,
-      data: todo
-    }).then(function successfulCallback(response) {
-      todos = response.data;
+      list = response.data;
     }, function(error) {
       console.log(error);
     });
     return promise;
+  }
+
+  function defineShopList() {
+    return list;
   }
 
 });
