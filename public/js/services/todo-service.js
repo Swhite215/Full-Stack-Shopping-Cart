@@ -1,12 +1,12 @@
 var app = angular.module('todoModule');
 
-// Need to inject something to make AJAX calls
 app.factory('todoService', function($http) {
 
+  //List that stores returned database information
   var list = [];
 
   return {
-    // Establish our key/value pairs for our functions
+    // Key-Value Pairs for Functions
     getShopList: getShopList,
     defineShopList: defineShopList,
     removeListItem: removeListItem,
@@ -14,7 +14,7 @@ app.factory('todoService', function($http) {
     updateItem: updateItem
   }
 
-  // Write out our functions, one for each CRUD command(GET, POST, PUT, DELETE)
+  //service function that sends GET request to server
   function getShopList() {
     var promise = $http({
       method: 'GET',
@@ -28,6 +28,7 @@ app.factory('todoService', function($http) {
     return promise;
   }
 
+  //service function that sends DELETE request to server
   function removeListItem(itemId) {
     var promise = $http({
       method: 'DELETE',
@@ -40,6 +41,7 @@ app.factory('todoService', function($http) {
     return promise;
   }
 
+  //service function that sends POST request to server
   function addListItem(object) {
     var promise = $http({
       method: 'POST',
@@ -56,6 +58,7 @@ app.factory('todoService', function($http) {
     return promise;
   }
 
+  //service function that sends PUT request to server
   function updateItem(changeObject) {
     var newItem = {
       product: changeObject.product,
@@ -73,6 +76,7 @@ app.factory('todoService', function($http) {
     return promise;
   }
 
+  //service function that returns my list
   function defineShopList() {
     return list;
   }
