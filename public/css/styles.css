@@ -3,3 +3,66 @@ p {
   margin-right: 50px;
   font-size: 20px;
 }
+
+/* Global Styles */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Garamond, serif;
+}
+
+div.container {
+  width: 90%;
+  text-align: center;
+  margin-top: 5%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+div.container h2#pageTitle {
+  font-size: 60px;
+  font-family: Garamond, serif;
+}
+
+/* Input Styling */
+
+div.inputContainer {
+  width: 100%;
+}
+
+div.inputContainer input {
+  width: 30%;
+  padding: 10px;
+  line-height: 20px;
+  font-size: 18px;
+}
+
+div.inputContainer button {
+  width: 10%;
+  padding: 10px;
+  line-height: 20px;
+  font-size: 18px;
+}
+
+hr {
+  color: white;
+}
+
+/* Output Styling */
+div.outputContainer {
+  width: 75%;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 10px;
+  border: 1px solid red;
+  border-radius: 5px;
+}
+
+div.outputContainer h2#outputTitle {
+  font-size: 40px;
+  text-decoration: underline;
+}
+
+div.outputContainer h3 {
+  font-size: 32px;
+}

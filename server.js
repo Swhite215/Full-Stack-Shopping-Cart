@@ -1,12 +1,12 @@
 var express = require('express');
-//server module
+//Server module
 var app = express();
 var pg = require('pg');
-//will parse through the data I am sending and receieving.
+// Will parse through the data I am sending and receieving.
 var bodyParser = require('body-parser');
-//string to define connection to pg.
+// String to define connection to pg.
 var connectionString = 'postgres://postgres:grandcircuspg@localhost:5432/postgres';
-//creates client based on connection to pg.
+// Creates client based on connection to pg.
 var client = new pg.Client(connectionString);
 
 var config = {
@@ -20,7 +20,7 @@ var config = {
 };
 
 var pool = new pg.Pool(config);
-// bodyParser converts to JSON and makes it accessible.
+// BodyParser converts to JSON and makes it accessible.
 app.use(bodyParser.json({ extended: true}));
 app.use(express.static(__dirname + '/public'));
 

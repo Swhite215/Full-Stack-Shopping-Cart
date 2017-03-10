@@ -8,33 +8,40 @@
 
   <body ng-controller="todoController">
 
-    <h2>TODO List</h2>
+    <div class="container">
 
-    <!-- NG Models for Object Product and Price -->
-    <input type="text" placeholder="Shopping Item" ng-model="object.product">
-    <input type="text" placeholder="Price" ng-model="object.price">
-    <!-- NG-CLICK for Add Item Function -->
-    <button type="button" ng-click="addItem(object)">Add</button>
+      <h2 id="pageTitle">Full Stack Shopping Cart</h2>
 
-    <hr>
+      <div class="inputContainer">
+        <!-- NG Models for Object Product and Price -->
+        <input type="text" placeholder="Shopping Item" ng-model="object.product">
+        <input type="number" placeholder="Price" ng-model="object.price">
+        <!-- NG-CLICK for Add Item Function -->
+        <button type="button" ng-click="addItem(object)">Add</button>
+      </div>
 
-    <!-- NG-Repeat DIV -->
-    <div ng-repeat="item in shopList">
-      <p>
-        <!-- NG-CLICK for Removing Function -->
-        <button type="button" ng-click="removeItem(item.id)">Delete</button>
-        {{item.product}}
-        <span class="priceSpan">{{item.price}}</span>
-      </p>
-      <!-- NG-MODEL Input for Changing Function -->
-      <input class="editStuff" type="text" ng-model="updatedItem" placeholder="Alter Item">
-      <input class="editStuff" type="number" ng-model="updatedPrice" placeholder="Alter Price">
-      <!-- NG-CLICK for Changing Function -->
-      <button class="editStuff" type="button" ng-click="updateItem(updatedItem, updatedPrice, item.id)">Edit!</button>
-    </div>
+      <hr>
 
-    <div class="Total Div">
-      <p>Total: {{total}} </p>
+      <div class="outputContainer">
+        <h2 id="outputTitle">The Cart O'Goodies</h2>
+        <h3>Total: ${{total}}</h3>
+        <!-- NG-Repeat DIV -->
+        <div class="singleItem" ng-repeat="item in shopList">
+          <!-- NG-CLICK for Removing Function -->
+          <button type="button" ng-click="removeItem(item.id)">Delete</button>
+          <p>
+            {{item.product}}
+            <span class="priceSpan">${{item.price}}.00</span>
+          </p>
+          <!-- NG-MODEL Input for Changing Function -->
+          <input class="editStuff" type="text" ng-model="updatedItem" placeholder="Alter Item">
+          <input class="editStuff" type="number" ng-model="updatedPrice" placeholder="Alter Price">
+          <!-- NG-CLICK for Changing Function -->
+          <button class="editStuff" type="button" ng-click="updateItem(updatedItem, updatedPrice, item.id)">Edit!</button>
+        </div>
+
+      </div>
+
     </div>
 
     <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>

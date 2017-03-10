@@ -1,6 +1,7 @@
 var app = angular.module('todoModule');
 
 app.controller('todoController', function($scope, todoService) {
+  //This $scope variable stores the cart total
   $scope.total = 0;
 
   // This function retrieves the information from the server
